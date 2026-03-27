@@ -26,7 +26,7 @@ from fpdf import FPDF
 import win32print
 
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
-VERSION    = "1.1.0"
+VERSION    = "1.2.0"
 UPDATE_URL = "https://raw.githubusercontent.com/suresh2216g/giftcardprinter/refs/heads/main/GiftCardPrinter.py"
 SETTINGS_FILE = os.path.join(os.path.expanduser("~"), "GiftCardPrinter_settings.json")
 DEFAULT_CROPBOX = [400, 85, 790, 270]
