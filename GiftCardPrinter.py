@@ -60,7 +60,8 @@ def find_poppler():
 
 
 def find_sumatra():
-    """Search common locations for SumatraPDF."""
+    """Search common locations or auto-download SumatraPDF."""
+    # Check common install locations
     common = [
         os.path.join(os.environ.get("LOCALAPPDATA", ""), "SumatraPDF", "SumatraPDF.exe"),
         r"C:\Program Files\SumatraPDF\SumatraPDF.exe",
@@ -69,7 +70,22 @@ def find_sumatra():
     for p in common:
         if os.path.exists(p):
             return p
-    return ""
+
+    # Auto-download to app folder
+    app_dir = os.path.join(os.environ.get("LOCALAPPDATA", ""), "GiftCardPrinter")
+    os.makedirs(app_dir, exist_ok=True)
+    sumatra_path = os.path.join(app_dir, "SumatraPDF.exe")
+
+    if os.path.exists(sumatra_path):
+        return sumatra_path
+
+    # Download SumatraPDF portable
+    try:
+        url = "https://www.sumatrapdfreader.org/dl/rel/3.5.2/SumatraPDF-3.5.2-64.exe"
+        urllib.request.urlretrieve(url, sumatra_path)
+        return sumatra_path
+    except:
+        return ""
 
 
 def get_printers():
