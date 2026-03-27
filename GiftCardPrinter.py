@@ -275,7 +275,7 @@ class App(tk.Tk):
                 self._log("  Downloading latest version...", "info")
                 tmp = current_file + ".new"
                 urllib.request.urlretrieve(UPDATE_URL, tmp)
-                with open(tmp, "r") as f:
+                with open(tmp, "r", encoding="utf-8", errors="ignore") as f:
                     new_content = f.read()
                 if f'VERSION    = "{VERSION}"' in new_content:
                     os.unlink(tmp)
@@ -298,7 +298,7 @@ class App(tk.Tk):
         output_path = input_path / "cropped"
         output_path.mkdir(exist_ok=True)
 
-        pdf_files = sorted(input_path.glob("*.pdf"))
+        pdf_files = sorted([f for f in input_path.glob("*.pdf") if f.name != "merged_4x6.pdf"])
         if not pdf_files:
             self._log("No PDFs found in folder!", "fail"); return []
 
