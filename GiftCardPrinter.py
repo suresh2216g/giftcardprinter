@@ -263,15 +263,20 @@ class App(tk.Tk):
                 current_file = os.path.abspath(sys.argv[0])
                 self._log("  Downloading latest version...", "info")
                 tmp = current_file + ".new"
-                urllib.request.urlretrieve(UPDATE_URL, tmp)
-                with open(tmp, "r", encoding="utf-8", errors="ignore") as f:
-                    new_content = f.read()
+                # Download as binary
+                with urllib.request.urlopen(UPDATE_URL) as response:
+                    new_bytes = response.read()
+
+                # Decode safely
+                new_content = new_bytes.decode("utf-8", errors="ignore")
+
                 if f'VERSION    = "{VERSION}"' in new_content:
-                    os.unlink(tmp)
-                    self._log("  ✅ Already on latest version!", "ok")
+                    self._log("  Already on latest version!", "ok")
                 else:
-                    os.replace(tmp, current_file)
-                    self._log("  ✅ Updated! Restarting...", "ok")
+                    # Write new file as binary to preserve all chars
+                    with open(current_file, "wb") as f:
+                        f.write(new_bytes)
+                    self._log("  Updated! Restarting...", "ok")
                     time.sleep(2)
                     subprocess.Popen([sys.executable, current_file])
                     self.destroy()
