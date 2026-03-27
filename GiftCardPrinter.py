@@ -1,5 +1,5 @@
 """
-Gift Card Printer - GUI App
+DealsBinz Printer - GUI App
 Auto-detects Poppler, SumatraPDF, and Printers.
 
 Requirements:
@@ -118,7 +118,7 @@ def save_settings(data):
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title(f"🎁 Gift Card Printer v{VERSION}")
+        self.title(f"🏷️ DealsBinz Printer v{VERSION}")
         self.resizable(True, True)
         self.minsize(660, 560)
         self.update_idletasks()
@@ -147,7 +147,7 @@ class App(tk.Tk):
 
     def _build_ui(self):
         # ── Title ──
-        tk.Label(self, text="🎁 Gift Card Printer", font=("Segoe UI", 18, "bold"),
+        tk.Label(self, text="🏷️ DealsBinz Printer", font=("Segoe UI", 18, "bold"),
                  bg="#1e1e2e", fg="#cdd6f4").pack(pady=(15, 2))
         tk.Label(self, text=f"Crop · Merge · Print to Rollo   v{VERSION}",
                  font=("Segoe UI", 10), bg="#1e1e2e", fg="#a6adc8").pack()
