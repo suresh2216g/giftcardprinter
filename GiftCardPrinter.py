@@ -25,7 +25,7 @@ from fpdf import FPDF
 
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
 VERSION              = "1.0.0"
-UPDATE_URL           = "https://raw.githubusercontent.com/yourusername/giftcardprinter/main/GiftCardPrinter.py"
+UPDATE_URL           = "https://raw.githubusercontent.com/suresh2216g/giftcardprinter/refs/heads/main/GiftCardPrinter.py"
 DEFAULT_INPUT_FOLDER = r"C:\Users\ankit\OneDrive\Desktop\AMZ"
 DEFAULT_CROPBOX      = [400, 85, 790, 270]
 POPPLER_PATH         = r"C:\Program Files\poppler-25.12.0\Library\bin"
