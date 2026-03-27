@@ -176,9 +176,7 @@ class App(tk.Tk):
                               bg="#585b70", fg="white", font=("Segoe UI", 8),
                               relief="flat", padx=6, cursor="hand2").pack(side="left")
 
-        row(sf, "PDF Folder:",   self.folder,  self._browse_folder)
-        row(sf, "Poppler Path:", self.poppler, self._browse_poppler)
-        row(sf, "SumatraPDF:",   self.sumatra, self._browse_sumatra)
+        row(sf, "PDF Folder:", self.folder, self._browse_folder)
         self.printer_combo = row(sf, "Printer:", self.printer,
                                   is_combo=True, values=get_printers())
 
@@ -222,15 +220,6 @@ class App(tk.Tk):
         d = filedialog.askdirectory(initialdir=self.folder.get() or "C:\\")
         if d: self.folder.set(d)
 
-    def _browse_poppler(self):
-        d = filedialog.askdirectory(title="Select Poppler bin folder")
-        if d: self.poppler.set(d)
-
-    def _browse_sumatra(self):
-        f = filedialog.askopenfilename(title="Select SumatraPDF.exe",
-                                        filetypes=[("EXE", "*.exe")])
-        if f: self.sumatra.set(f)
-
     def _save(self):
         save_settings({
             "folder":  self.folder.get(),
@@ -259,7 +248,7 @@ class App(tk.Tk):
         if not self.folder.get():
             messagebox.showerror("Error", "Please select a PDF folder!"); return False
         if not self.poppler.get() or not os.path.exists(self.poppler.get()):
-            messagebox.showerror("Error", "Poppler path not found! Please browse to it."); return False
+            messagebox.showerror("Error", "Poppler not found! Please install Poppler from:\nhttps://github.com/oschwartz10612/poppler-windows/releases"); return False
         if not self.printer.get():
             messagebox.showerror("Error", "Please select a printer!"); return False
         return True
